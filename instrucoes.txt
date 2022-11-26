@@ -1,0 +1,4 @@
+Instalar a biblioeca requests
+
+pip install requests
+
