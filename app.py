@@ -44,3 +44,4 @@ pprint(resultado_put.json())
 
 resultado_delete = requests.delete('https://jsonplaceholder.typicode.com/todos/2')
 pprint(resultado_delete.json())
+# Aqui vai dar vazio pois exluiu o recurso
