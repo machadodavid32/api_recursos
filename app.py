@@ -8,9 +8,12 @@ from pprint import pprint
 
 # get - permite obter informações de uma api
 
-# entrar no site https://jsonplaceholder.typicode.com/ e descer até 'todos' e pegar este link:
+# entrar no site https://jsonplaceholder.t
+# ypicode.com/ e descer até 'todos' e pegar este link:
 # https://jsonplaceholder.typicode.com/todos
 
+
+# get
 resultado_get = requests.get('https://jsonplaceholder.typicode.com/todos')
 #pprint(resultado_get.json())  # json é o formato mais comum que as api trabalham
 

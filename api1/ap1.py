@@ -1,32 +1,58 @@
 from flask import Flask, jsonify, request
 
-# Iremos criar uma api de blog onde iremos editar, criar e excluir postagens em um blog usando api
-
-
 app = Flask(__name__)
+
 postagens = [
     {
-        'titulo': 'Minha História',
+        'título': 'Minha História',
         'autor': 'Amanda Dias'
-         
-                },
+    },
     {
-        
-        'titulo': 'Novo Dispositivo Sony',
+        'título': 'Novo Dispositivo Sony',
         'autor': 'Howard Stringer'
     },
     {
-        'titulo': 'Lnaçamento do Ano',
+        'título': 'Lançamento do Ano',
         'autor': 'Jeff Bezos'
-    }
+    },
 ]
-# Definir rota padrão - GET http://localhost:5000/
+# Rota padrão - GET https://localhost:5000
 @app.route('/')
 def obter_postagens():
     return jsonify(postagens)
 
-@app.route('/postagens', methods=['GET'])
-def obter_postagem_por_id(indice):
+
+
+# Obter postagem por id - GET http://localhost:5000/postagem/1
+@app.route('/postagem/<int:indice>', methods=['GET'])
+def obter_postagem_por_indice(indice):
+    return jsonify(postagens[indice])
+
+# Criar uma nova postagem - POST http://localhost:5000/postagem
+@app.route('/postagem',methods=['POST'])
+def nova_postagem():
+    postagem = request.get_json()
+    postagens.append(postagem)
+
+    return jsonify(postagem, 200)
+
+# Alterar uma postagem existente - PUT https://localhost:5000/postagem/1
+@app.route('/postagem/<int:indice>',methods=['PUT'])
+def alterar_postagem(indice):
+    postagem_alterada = request.get_json()
+    postagens[indice].update(postagem_alterada)
+
     return jsonify(postagens[indice], 200)
 
-app.run(port=5000, host='localhost', debug=True)
+# Excluir uma postagem - DELETE - https://localhost:5000/postagem/1
+@app.route('/postagem/<int:indice>',methods=['DELETE'])
+def excluir_postagem(indice):
+    try:
+        if postagens[indice] is not None:
+            del postagens[indice]
+            return jsonify(f'Foi excluído a postagem {postagens[indice]}',200)
+    except:
+        return jsonify('Não foi possível encontrar a postagem para exclusão',404)
+
+    
+app.run(port=5000,host='localhost',debug=True)
