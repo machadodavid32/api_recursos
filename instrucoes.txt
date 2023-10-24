@@ -13,3 +13,5 @@ https://github.com/search?q=api+list&type=Repositories
 
 
 
+PARA UTILIZAR BANCO DE DADOS
+1 - baixe o db browser for sql lite e instale
