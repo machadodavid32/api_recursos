@@ -1,0 +1,15 @@
+Como consumir api´s com autenticação com módulos requests.
+Código abaixo
+
+from requests.auth import HTTPBasicAuth
+import requests
+
+resultado = requests.get('http://localhost:5000/login',auth=('usuario', 'senha'))
+print(resultado.json)  # ao dar play no terminal, um token deverá ser apresentado
+
+#Utilizando o token
+resultado_autores = requests.get('http://localhost:5000/autores', headers={'x-access-token':resultado.json()['token']})
+
+print(resultado_autores.json()) # os autores devem aparecer no terminal
+
+
